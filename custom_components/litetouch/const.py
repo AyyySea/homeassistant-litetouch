@@ -1,0 +1,12 @@
+"""Constants for LiteTouch load-based integration."""
+DOMAIN = "litetouch"
+CONF_HOST = "host"
+CONF_PORT = "port"
+CONF_LOADS = "loads"
+CONF_SCENES = "scenes"
+CONF_MODULE = "module"
+CONF_CHANNEL = "channel"
+CONF_NAME = "name"
+CONF_LOADID = "loadid"
+CONF_DRIVE_SCENE = "drive_scene"
+DEFAULT_PORT = 10001

@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+*.bak
+*.swp
+.DS_Store
+.idea/
+.vscode/
+
+# Generated per-install artifacts (contain your house's load names/layout)
+scene_loads_map.json
+litetouch_config.yaml
+load_derivation_report.txt
+backups/

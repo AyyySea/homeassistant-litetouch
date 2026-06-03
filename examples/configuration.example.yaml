@@ -1,0 +1,39 @@
+# Example LiteTouch configuration block for Home Assistant.
+# Generate your real config with tools/generate_load_config.py and merge into your configuration.yaml.
+
+litetouch:
+  host: "<your-controller-ip>"   # your LiteTouch controller's IP (typically a Lantronix XPort)
+  port: 10001                     # default Lantronix XPort port
+  loads:
+    # Each entry is one physical dimmer load.
+    #
+    # module:      4-char hex module address (from RMODU broadcasts)
+    # channel:     0-7 for 8-channel modules, 0-3 for 4-channel modules
+    # name:        friendly name shown in HA / HomeKit
+    # drive_scene: scene used to fire this load via CINLL
+    #              - integer scene loadid (1-256) for controllable loads
+    #              - null for read-only (state-tracked, can't be driven from HA)
+
+    # Single-load examples (clean 1-to-1 drive):
+    - {module: "0001", channel: 0, name: "Guest Bath Vanity", drive_scene: 4}
+    - {module: "0001", channel: 2, name: "Guest Bedroom Main", drive_scene: 1}
+    - {module: "00F5", channel: 0, name: "Master Bath", drive_scene: 30}
+
+    # Group-driven example (tapping this fires drive_scene which also fires sibling load(s)):
+    - {module: "0006", channel: 0, name: "Kitchen Perimeter", drive_scene: 16}
+
+    # Read-only example (state-tracked but can't be driven directly):
+    - {module: "0007", channel: 2, name: "Unnamed 0007-2", drive_scene: null}
+
+  scenes:
+    # Aggregate scenes exposed as on/off entities. Uncomment as desired.
+    # - {loadid: 40, name: "All Off"}
+    # - {loadid: 90, name: "House Off"}
+    # - {loadid: 76, name: "All Outside"}
+
+# Optional: expose entities to Apple Home via a HomeKit Bridge
+homekit:
+  - advertise_ip: <your-ha-host-ip>    # your HA host's IP
+    filter:
+      include_domains:
+        - light
